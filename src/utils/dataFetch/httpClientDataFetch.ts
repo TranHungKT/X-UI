@@ -1,22 +1,15 @@
-import { DataFetch, DataFetchFulfilled, DataFetchOptions } from '@Shared/utils/dataFetch/dataFetch';
-import { DataFetchError } from '@Shared/utils/dataFetch/dataFetchError';
-import {
-  FetchHTTPClientConfig,
-  FetchHTTPClientError,
-  makeFetchHttpClient,
-} from '@Shared/utils/httpClient';
+import { DataFetch, DataFetchFulfilled, DataFetchOptions } from '../dataFetch';
+import { DataFetchError } from '../dataFetch/dataFetchError';
+import { FetchHTTPClientConfig, FetchHTTPClientError, makeFetchHttpClient } from '../httpClient';
 
-import { authRequestInterceptor, authResponseInterceptor } from '../../services/interceports';
+// import { authRequestInterceptor, authResponseInterceptor } from '../../services/interceports';
 
 export class HttpClientDataFetch implements DataFetch<FetchHTTPClientConfig> {
   private readonly _fetchHttpClient: ReturnType<typeof makeFetchHttpClient>;
 
   constructor(
     baseURL: string,
-    {
-      requestInterceptors = [authRequestInterceptor],
-      responseInterceptors = [authResponseInterceptor],
-    }: DataFetchOptions = {},
+    { requestInterceptors = [], responseInterceptors = [] }: DataFetchOptions = {},
   ) {
     this._fetchHttpClient = makeFetchHttpClient({
       baseUrl: baseURL,
@@ -55,9 +48,11 @@ export class HttpClientDataFetch implements DataFetch<FetchHTTPClientConfig> {
         data: payload,
         ...config,
       });
+
       return response;
     } catch (e) {
       const error = e as FetchHTTPClientError<{}, any>;
+
       throw new DataFetchError(error.response?.status, error.response?.data);
     }
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import LoginPage from './pages/Login/LoginPage';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const theme = createTheme({
   cssVariables: true,
@@ -10,10 +11,14 @@ const theme = createTheme({
   },
 });
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <LoginPage />
+      <QueryClientProvider client={queryClient}>
+        <LoginPage />
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }

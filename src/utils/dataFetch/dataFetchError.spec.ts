@@ -4,11 +4,14 @@ let error: DataFetchError;
 
 describe('DataFetchError', () => {
   beforeEach(() => {
-    error = new DataFetchError(400, { response: 'test' });
+    error = new DataFetchError(400, {
+      errorId: '',
+      message: '',
+    });
   });
 
   it('should return response test', () => {
-    expect(error.response).toEqual({ response: 'test' });
+    expect(error.response).toEqual({ response: { errorId: '', message: '' } });
   });
 
   it('should return status 400', () => {

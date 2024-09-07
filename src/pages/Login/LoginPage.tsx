@@ -16,12 +16,15 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import XIcon from '@mui/icons-material/X';
 import BootstrapInput from '../../components/Input/BootstrapInput';
+import { useMutation } from '@tanstack/react-query';
+import { stsService } from '../../services/authServices';
+import { DataFetchError } from '../../utils/dataFetch';
 
 const VALIDATION_SCHEMA = yup.object({
   email: yup.string().email('Enter a valid email').required('Email is required'),
   password: yup
     .string()
-    .min(8, 'Password should be of minimum 8 characters length')
+    .min(6, 'Password should be of minimum 6 characters length')
     .required('Password is required'),
 });
 
@@ -32,7 +35,18 @@ export default function LoginPage() {
       password: '',
     },
     validationSchema: VALIDATION_SCHEMA,
-    onSubmit: () => {},
+    onSubmit: () => {
+      mutation.mutate();
+    },
+  });
+
+  const mutation = useMutation({
+    mutationFn: () => {
+      return stsService.login({
+        email: formik.values.email,
+        password: formik.values.password,
+      });
+    },
   });
 
   return (
