@@ -1,22 +1,7 @@
+import { UserDetails } from '../models/user';
 import { DataFetch, HttpClientDataFetch } from '../utils/dataFetch';
 import { FetchHTTPClientConfig } from '../utils/httpClient';
 import { authRequestInterceptor } from '../utils/interceptors/RequestInterceptor';
-
-interface UserDetails {
-  id: String;
-  email: String;
-  fullName: String;
-  username: String;
-  location: String;
-  about: String;
-  confirmed: Boolean;
-  avatar: Avatar;
-}
-
-interface Avatar {
-  imageId: String;
-  imageSrc: String;
-}
 
 interface UserService {
   getUserData(id: String): Promise<UserDetails>;

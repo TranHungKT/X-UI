@@ -7,6 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 import { SecureRoute } from './components/SecureRoute/SecureRoute';
 import SecureApp from './SecureApp';
 import { LOGIN_PATH } from './constants/routes';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const theme = createTheme({
   cssVariables: true,
@@ -19,22 +21,24 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path={LOGIN_PATH} element={<LoginPage />} />
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <Routes>
+            <Route path={LOGIN_PATH} element={<LoginPage />} />
 
-          <Route
-            path="*"
-            element={
-              <SecureRoute>
-                <SecureApp />
-              </SecureRoute>
-            }
-          />
-        </Routes>
-      </QueryClientProvider>
-    </ThemeProvider>
+            <Route
+              path="*"
+              element={
+                <SecureRoute>
+                  <SecureApp />
+                </SecureRoute>
+              }
+            />
+          </Routes>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
