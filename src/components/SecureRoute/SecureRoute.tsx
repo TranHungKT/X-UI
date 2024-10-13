@@ -1,21 +1,21 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_PATH } from '../../constants/routes';
+import useAuthorization from '../../utils/hooks/useAuthorization';
 
 export const SecureRoute = (props: PropsWithChildren<{}>) => {
-  // const isAuthenticated = false;
-  // const navigate = useNavigate();
+  const isAuthorized = useAuthorization();
 
-  // useEffect(() => {
-  //   if (!isAuthenticated) {
-  //     navigate(LOGIN_PATH);
-  //   }
-  // }, [isAuthenticated, navigate]);
+  const navigate = useNavigate();
 
-  // // TODO: HANDLE AUTHENTICATION
-  // if (!isAuthenticated) {
-  //   return null;
-  // }
+  useEffect(() => {
+    if (isAuthorized === false) {
+      navigate(LOGIN_PATH, { replace: true });
+    }
+    if (isAuthorized === null) {
+      return;
+    }
+  }, [navigate, isAuthorized]);
 
   return <>{props.children}</>;
 };

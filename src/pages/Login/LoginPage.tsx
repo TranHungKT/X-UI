@@ -20,6 +20,10 @@ import BootstrapInput from '../../components/Input/BootstrapInput';
 import { useMutation } from '@tanstack/react-query';
 import { stsService } from '../../services/authServices';
 import { DataFetchError } from '../../utils/dataFetch';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { HOME_PATH } from '../../constants/routes';
+import useAuthorization from '../../utils/hooks/useAuthorization';
 
 const VALIDATION_SCHEMA = yup.object({
   email: yup.string().email('Enter a valid email').required('Email is required'),
@@ -42,6 +46,7 @@ const style = {
 };
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -61,6 +66,13 @@ export default function LoginPage() {
       });
     },
   });
+  const isAuthorized = useAuthorization();
+
+  useEffect(() => {
+    if (mutation.isSuccess || isAuthorized) {
+      navigate(HOME_PATH, { replace: true });
+    }
+  }, [mutation, navigate, isAuthorized]);
 
   return (
     <>
