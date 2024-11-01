@@ -1,7 +1,7 @@
 import { HttpClientDataFetch, DataFetch } from '../utils/dataFetch';
 import { FetchHTTPClientConfig } from '../utils/httpClient';
 import Cookies from 'js-cookie';
-const API_URL = `http://localhost:8080/user-service/api/v1/auth`;
+const API_URL = 'http://localhost:8080/user-service/api/v1/auth';
 
 interface STSService {
   login(userData: LoginFlowRequest): Promise<string>;
@@ -28,11 +28,14 @@ class DefaultSTSService implements STSService {
         email: string;
         password: string;
       },
-      { token: string }
+      {
+        token: string;
+        userId: string;
+      }
     >(`${API_URL}/login`, userData);
 
     Cookies.set('token', responseData.token);
-
+    Cookies.set('userId', responseData.userId);
     return responseData.token;
   }
 }

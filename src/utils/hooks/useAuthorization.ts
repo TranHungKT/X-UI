@@ -3,11 +3,14 @@ import { userServices } from '../../services/userServices';
 import { useAppDispatch } from '../../store/reduxHook';
 import { useEffect } from 'react';
 import { saveUserData } from '../../store/users/userSlice';
+import Cookies from 'js-cookie';
 
 export default function useAuthorization() {
+  const userId = Cookies.get('userId');
+
   const { data, isSuccess, isFetched, isError } = useQuery({
     queryKey: ['getUserData'],
-    queryFn: () => userServices.getUserData('96751bae-00d0-4b73-b59f-4ffa8112e04c'),
+    queryFn: () => userServices.getUserData(userId || ''),
   });
 
   const dispatch = useAppDispatch();
