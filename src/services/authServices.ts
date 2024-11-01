@@ -1,6 +1,7 @@
+import Cookies from 'js-cookie';
+
 import { HttpClientDataFetch, DataFetch } from '../utils/dataFetch';
 import { FetchHTTPClientConfig } from '../utils/httpClient';
-import Cookies from 'js-cookie';
 const API_URL = 'http://localhost:8080/user-service/api/v1/auth';
 
 interface STSService {

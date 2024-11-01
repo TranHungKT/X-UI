@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+
 import { FetchHTTPClientConfig } from '../httpClient';
 
 const addAuthorizationHeader = (accessToken: string, config: FetchHTTPClientConfig) => ({
@@ -7,7 +8,7 @@ const addAuthorizationHeader = (accessToken: string, config: FetchHTTPClientConf
 });
 
 export const authRequestInterceptor = () => async (config: FetchHTTPClientConfig) => {
-  if (!!Cookies.get('token')) {
+  if (Cookies.get('token')) {
     return addAuthorizationHeader(Cookies.get('token') as string, config);
   }
 };

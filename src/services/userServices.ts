@@ -7,7 +7,7 @@ interface UserService {
   getUserData(id: String): Promise<UserDetails>;
 }
 
-const API_URL = `http://localhost:8080/user-service/api/v1/users`;
+const API_URL = 'http://localhost:8080/user-service/api/v1/users';
 
 class UserServices implements UserService {
   private readonly _dataFetch: DataFetch<FetchHTTPClientConfig>;

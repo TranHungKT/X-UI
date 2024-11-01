@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import { UserDetails } from '../../models/user';
 
 interface InitialState {

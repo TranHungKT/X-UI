@@ -1,3 +1,6 @@
+import React, { useEffect } from 'react';
+
+import XIcon from '@mui/icons-material/X';
 import {
   Box,
   FormControlLabel,
@@ -12,17 +15,15 @@ import {
   FormControl,
   Modal,
 } from '@mui/material';
-
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import XIcon from '@mui/icons-material/X';
-import BootstrapInput from '../../components/Input/BootstrapInput';
 import { useMutation } from '@tanstack/react-query';
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import * as yup from 'yup';
+
+import BootstrapInput from '../../components/Input/BootstrapInput';
+import { HOME_PATH } from '../../constants/routes';
 import { stsService } from '../../services/authServices';
 import { DataFetchError } from '../../utils/dataFetch';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { HOME_PATH } from '../../constants/routes';
 import useAuthorization from '../../utils/hooks/useAuthorization';
 
 const VALIDATION_SCHEMA = yup.object({
@@ -34,7 +35,7 @@ const VALIDATION_SCHEMA = yup.object({
 });
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',

@@ -1,9 +1,9 @@
-import { Box, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useState } from 'react';
 
+import { Box, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Link, To } from 'react-router-dom';
-import './SideBar.css';
 
+import './SideBar.css';
 import { SideBarItems } from './SideBarItems';
 import { barStyle, itemIconStyle, itemStyle, itemTextStyle } from './style';
 

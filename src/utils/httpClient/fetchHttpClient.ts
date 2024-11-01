@@ -93,7 +93,8 @@ const handleResponseError = async <R, P extends Record<string, any>>(
   let errorBody: R;
   try {
     errorBody = await response.json();
-  } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e: any) {
     throw buildError(buildResponse(response, response.statusText), { url, ...config });
   }
   throw buildError(buildResponse<R>(response, errorBody), { url, ...config });
@@ -103,6 +104,7 @@ const handleResponse = async <R>(response: Response, responseType: ResponseType)
   try {
     const responseBody = await response[responseType]();
     return buildResponse<R>(response, responseBody);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     return buildResponse<R>(response, undefined as any);
   }

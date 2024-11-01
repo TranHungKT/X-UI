@@ -1,9 +1,11 @@
+import React from 'react';
+
+import { Box, CssBaseline } from '@mui/material';
 import { Routes, Route } from 'react-router-dom';
+
+import SideBar from './components/SideBar/SideBar';
 import HomePage from './pages/HomePage/HomePage';
 import InitialPage from './pages/InitialPage/InitialPage';
-import { Box, CssBaseline } from '@mui/material';
-import SideBar from './components/SideBar/SideBar';
-import React from 'react';
 
 export default function SecureApp() {
   return (

@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
+import Cookies from 'js-cookie';
+
 import { userServices } from '../../services/userServices';
 import { useAppDispatch } from '../../store/reduxHook';
-import { useEffect } from 'react';
 import { saveUserData } from '../../store/users/userSlice';
-import Cookies from 'js-cookie';
 
 export default function useAuthorization() {
   const userId = Cookies.get('userId');
